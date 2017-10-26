@@ -11,15 +11,26 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jakewharton.rxbinding2.support.v7.widget.RxSearchView;
+import com.jakewharton.rxbinding2.support.v7.widget.SearchViewQueryTextEvent;
 import com.yousuf.shawon.rxandroidsamples.R;
 import com.yousuf.shawon.rxandroidsamples.adapter.ContactAdapter;
+import com.yousuf.shawon.rxandroidsamples.adapter.ContactRecyclerViewAdapter;
 import com.yousuf.shawon.rxandroidsamples.helper.ContactsQuery;
+import com.yousuf.shawon.rxandroidsamples.model.ContactPerson;
 import com.yousuf.shawon.rxandroidsamples.util.Log;
-
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,7 +39,11 @@ public class DebounceSearchFragment extends Fragment  implements LoaderManager.L
 
 
   RecyclerView recyclerViewContact;
+  SearchView searchView;
   ContactAdapter mAdapter;
+  ContactRecyclerViewAdapter mRecyclerViewAdapter;
+
+  List<ContactPerson> mContactPersonList;
 
   final int typeIds[] = new int[]{0};
   final int viewIds[] = new int[]{ R.layout.row_contact};
@@ -47,6 +62,9 @@ public class DebounceSearchFragment extends Fragment  implements LoaderManager.L
     super.onCreate(savedInstanceState);
 
     mAdapter = new ContactAdapter(null, typeIds, viewIds);
+    mContactPersonList = new ArrayList<>();
+    mRecyclerViewAdapter = new ContactRecyclerViewAdapter(mContactPersonList, typeIds, viewIds);
+
   }
 
 
@@ -72,7 +90,33 @@ public class DebounceSearchFragment extends Fragment  implements LoaderManager.L
 
     recyclerViewContact = (RecyclerView) rootView.findViewById(R.id.recyclerViewContact);
     recyclerViewContact.setLayoutManager(new LinearLayoutManager(getActivity()));
-    recyclerViewContact.setAdapter(mAdapter);
+   // recyclerViewContact.setAdapter(mAdapter);
+    recyclerViewContact.setAdapter(mRecyclerViewAdapter);
+
+    searchView = (SearchView) rootView.findViewById(R.id.searchView);
+
+    RxSearchView.queryTextChanges(searchView)
+        .debounce(500, TimeUnit.MILLISECONDS)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Consumer<CharSequence>() {
+          @Override public void accept(CharSequence charSequence) throws Exception {
+            Log.i(TAG, "Searching for " + charSequence + " .....");
+            mRecyclerViewAdapter.filter(charSequence.toString());
+          }
+
+
+
+        });
+
+
+
+    //RxSearchView.queryTextChangeEvents(searchView)
+    //    .subscribe(new Consumer<SearchViewQueryTextEvent>() {
+    //      @Override public void accept(SearchViewQueryTextEvent searchViewQueryTextEvent)
+    //          throws Exception {
+    //        Log.i(TAG, "Searching for " + searchViewQueryTextEvent.queryText() + " .....");
+    //      }
+    //    });
 
   }
 
@@ -98,14 +142,18 @@ public class DebounceSearchFragment extends Fragment  implements LoaderManager.L
     data.moveToFirst();
     Log.i(TAG, "Total " + data.getCount() + " Contact found");
 
-    mAdapter.updateDataResource(data);
+    //mAdapter.updateDataResource(data);
     //  data.registerContentObserver(new Loader.ForceLoadContentObserver());
     data.setNotificationUri(getActivity().getContentResolver(), ContactsQuery.CONTENT_URI);
+
+    mRecyclerViewAdapter.updateResourceFromCursor(data);
+
 
 
   }
 
   @Override public void onLoaderReset(Loader<Cursor> loader) {
-    mAdapter.updateDataResource(null);
+   // mAdapter.updateDataResource(null);
+    mRecyclerViewAdapter.updateDataResource(null);
   }
 }
