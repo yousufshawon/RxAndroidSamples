@@ -5,6 +5,8 @@ import android.widget.TextView;
 import com.yousuf.shawon.rxandroidsamples.R;
 import com.yousuf.shawon.rxandroidsamples.helper.ContactsQuery;
 import com.yousuf.shawon.rxandroidsamples.model.ContactPerson;
+import com.yousuf.shawon.rxandroidsamples.util.Log;
+
 
 /**
  * Created by Yousuf on 10/26/2017.
@@ -13,6 +15,8 @@ import com.yousuf.shawon.rxandroidsamples.model.ContactPerson;
 public class ContactPersonViewHolder extends BaseViewHolder<ContactPerson> {
 
   TextView textViewName, textViewPhone;
+
+  String TAG = getClass().getSimpleName();
 
   public ContactPersonViewHolder(View itemView) {
     super(itemView);
@@ -33,6 +37,8 @@ public class ContactPersonViewHolder extends BaseViewHolder<ContactPerson> {
     }else {
       textViewPhone.setText("No number found");
     }
+
+   // Log.i(TAG, getAdapterPosition() + " : " + item.toString());
 
   }
 

@@ -28,6 +28,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -47,6 +48,8 @@ public class DebounceSearchFragment extends Fragment  implements LoaderManager.L
 
   final int typeIds[] = new int[]{0};
   final int viewIds[] = new int[]{ R.layout.row_contact};
+
+  Disposable searchViewDisposable;
 
   String TAG = getClass().getSimpleName();
 
@@ -95,9 +98,18 @@ public class DebounceSearchFragment extends Fragment  implements LoaderManager.L
 
     searchView = (SearchView) rootView.findViewById(R.id.searchView);
 
+    searchViewDisposable =
     RxSearchView.queryTextChanges(searchView)
-        .debounce(500, TimeUnit.MILLISECONDS)
+        .debounce(300, TimeUnit.MILLISECONDS)
         .observeOn(AndroidSchedulers.mainThread())
+        .filter(new Predicate<CharSequence>() {
+          @Override public boolean test(CharSequence charSequence) throws Exception {
+            if (charSequence == null || charSequence.toString().trim().length() == 0 ) {
+              return false;
+            }
+            return true;
+          }
+        })
         .subscribe(new Consumer<CharSequence>() {
           @Override public void accept(CharSequence charSequence) throws Exception {
             Log.i(TAG, "Searching for " + charSequence + " .....");
@@ -124,13 +136,20 @@ public class DebounceSearchFragment extends Fragment  implements LoaderManager.L
     Log.i(TAG, "onCreateLoader");
     // Uri contentUri = ContactsQuery.CONTENT_URI;
     Uri contentUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+   // contentUri = ContactsContract.Contacts.CONTENT_URI;
+
+    String filter = ""+ ContactsContract.Contacts.HAS_PHONE_NUMBER + " > 0 and "
+        + ContactsContract.CommonDataKinds.Phone.TYPE +"=" + ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE;
 
     //   mObserver = new Loader.ForceLoadContentObserver();
+
+    Log.i(TAG, ContactsQuery.SELECTION);
 
     return new CursorLoader(getActivity(),
         contentUri,
         ContactsQuery.PROJECTION,
         ContactsQuery.SELECTION,
+       //filter,
         null,
         ContactsQuery.SORT_ORDER);
 
@@ -155,5 +174,10 @@ public class DebounceSearchFragment extends Fragment  implements LoaderManager.L
   @Override public void onLoaderReset(Loader<Cursor> loader) {
    // mAdapter.updateDataResource(null);
     mRecyclerViewAdapter.updateDataResource(null);
+  }
+
+  @Override public void onDestroy() {
+    super.onDestroy();
+    searchViewDisposable.dispose();
   }
 }

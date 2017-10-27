@@ -41,9 +41,13 @@ public class ContactRecyclerViewAdapter extends BaseRecyclerViewAdapter<List<Con
       listCopy.clear();
       do {
 
+        String id = cursor.getString(ContactsQuery.ID);
+        String lookUpKey = cursor.getString(ContactsQuery.LOOKUP_KEY);
         String displayName = cursor.getString(ContactsQuery.DISPLAY_NAME);
         String number = cursor.getString(ContactsQuery.NUMBER);
         ContactPerson contactPerson = new ContactPerson(displayName, number);
+        contactPerson.setId(id);
+        contactPerson.setLookupKey(lookUpKey);
         items.add(contactPerson);
 
       }while (cursor.moveToNext());

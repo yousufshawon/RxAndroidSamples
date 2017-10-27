@@ -20,22 +20,22 @@
       android:layout_height="wrap_content"
       android:layout_marginLeft="@dimen/default_margin"
       android:layout_marginRight="@dimen/default_margin"
+      android:layout_marginTop="@dimen/default_margin_min"
+      android:layout_marginBottom="@dimen/default_margin_min"
       android:orientation="vertical"
       >
     <TextView
         android:id="@+id/textViewName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin_min"
         android:padding="@dimen/contact_name_padding"
         android:text=""
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         />
     <TextView
         android:id="@+id/textViewPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin_min"
         android:padding="@dimen/contact_name_padding"
         android:text=""
         />

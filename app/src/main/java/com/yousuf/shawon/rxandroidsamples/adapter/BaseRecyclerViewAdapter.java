@@ -43,7 +43,7 @@ public  abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<B
     if (items == null) {
       return 0;
     }
-    Log.i(TAG, "getItemCount");
+   // Log.i(TAG, "getItemCount");
     if (typeLayoutMap == null) {
       throw new IllegalStateException("You must call super.initiate(List<Object> items, int [] viewTypes, int[]viewIds) in adapter class constructor");
     }

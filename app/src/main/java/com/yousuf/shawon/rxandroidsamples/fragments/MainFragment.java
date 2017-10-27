@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.yousuf.shawon.rxandroidsamples.R;
+import com.yousuf.shawon.rxandroidsamples.util.Log;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -24,6 +25,8 @@ public class MainFragment extends Fragment {
 
   // disposable
   CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+  String TAG = getClass().getSimpleName();
 
   public MainFragment() {
     // Required empty public constructor
@@ -48,6 +51,7 @@ public class MainFragment extends Fragment {
 
   private void addListeners(){
 
+   // Log.i(TAG, "Adding listeners");
     Disposable disposable =
     RxView.clicks(buttonDeBounce).subscribe(new Consumer<Object>() {
       @Override public void accept(Object o) throws Exception {
@@ -74,8 +78,9 @@ public class MainFragment extends Fragment {
 
 
 
-  @Override public void onDestroyView() {
-    super.onDestroyView();
+  @Override public void onDestroy() {
+    super.onDestroy();
     compositeDisposable.dispose();
+
   }
 }

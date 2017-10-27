@@ -6,6 +6,8 @@ package com.yousuf.shawon.rxandroidsamples.model;
 
 public class ContactPerson {
 
+  String id;
+  String lookupKey;
   String name;
   String phone;
 
@@ -20,5 +22,30 @@ public class ContactPerson {
 
   public String getPhone() {
     return phone;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public void setLookupKey(String lookupKey) {
+    this.lookupKey = lookupKey;
+  }
+
+  @Override public String toString() {
+    return "ContactPerson{"
+        + "id='"
+        + id
+        + '\''
+        + ", lookupKey='"
+        + lookupKey
+        + '\''
+        + ", name='"
+        + name
+        + '\''
+        + ", phone='"
+        + phone
+        + '\''
+        + '}';
   }
 }
