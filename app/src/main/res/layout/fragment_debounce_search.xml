@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.yousuf.shawon.rxandroidsamples.fragments.DebounceSearchFragment"
+    android:background="@color/app_background"
     >
 
   <!-- TODO: Update blank fragment layout -->
@@ -12,16 +13,23 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:orientation="vertical"
+      android:paddingLeft="@dimen/default_padding"
+      android:paddingRight="@dimen/default_padding"
+      android:paddingBottom="@dimen/default_padding"
       >
     <android.support.v7.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:layout_marginTop="@dimen/default_margin_min"
         />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewContact"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/default_margin_min"
+
         />
   </LinearLayout>
 </FrameLayout>
