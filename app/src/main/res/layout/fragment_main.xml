@@ -25,6 +25,16 @@
           android:text="DeBounce Example"
           style="@style/listButtonStyle"
           />
+
+      <Button
+          android:id="@+id/buttonRetrofit"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Retrofit Example"
+          style="@style/listButtonStyle"
+          />
+
+
     </LinearLayout>
   </ScrollView>
 </FrameLayout>

@@ -21,7 +21,7 @@ import org.reactivestreams.Subscription;
  */
 public class MainFragment extends Fragment {
 
-  Button buttonDeBounce;
+  Button buttonDeBounce, buttonRetrofit;
 
   // disposable
   CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -46,6 +46,7 @@ public class MainFragment extends Fragment {
   private void initializeViews(View rootView){
 
     buttonDeBounce = (Button) rootView.findViewById(R.id.buttonDebounce);
+    buttonRetrofit= (Button) rootView.findViewById(R.id.buttonRetrofit);
   }
 
 
@@ -60,6 +61,16 @@ public class MainFragment extends Fragment {
     });
 
     compositeDisposable.add(disposable);
+
+    // Retrofit Example Button Click
+    Disposable retrofitDisposable =
+        RxView.clicks(buttonRetrofit).subscribe(new Consumer<Object>() {
+          @Override public void accept(Object o) throws Exception {
+            onSelectItem(new RetrofitFragment());
+          }
+        });
+
+    compositeDisposable.add(retrofitDisposable);
 
 
   }

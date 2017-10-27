@@ -5,8 +5,11 @@ package com.yousuf.shawon.rxandroidsamples.util;
  */
 
 import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.StrictMode;
+import android.util.TypedValue;
 import com.yousuf.shawon.rxandroidsamples.MainActivity;
 
 /**
@@ -86,5 +89,15 @@ public class Utils {
   public static boolean hasICS() {
     return Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH;
   }
+
+
+  /**
+   * Converting dp to pixel
+   */
+  public static int dpToPx( Context context, int dp) {
+    Resources r = context.getResources();
+    return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+  }
+
 }
 
