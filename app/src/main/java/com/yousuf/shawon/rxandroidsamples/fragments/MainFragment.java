@@ -21,7 +21,7 @@ import org.reactivestreams.Subscription;
  */
 public class MainFragment extends Fragment {
 
-  Button buttonDeBounce, buttonRetrofit;
+  Button buttonDeBounce, buttonRetrofit, buttonZip;
 
   // disposable
   CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -47,6 +47,7 @@ public class MainFragment extends Fragment {
 
     buttonDeBounce = (Button) rootView.findViewById(R.id.buttonDebounce);
     buttonRetrofit= (Button) rootView.findViewById(R.id.buttonRetrofit);
+    buttonZip= (Button) rootView.findViewById(R.id.buttonZip);
   }
 
 
@@ -72,7 +73,16 @@ public class MainFragment extends Fragment {
 
     compositeDisposable.add(retrofitDisposable);
 
+    Disposable zipDisposable =
+        RxView.clicks(buttonZip).subscribe(new Consumer<Object>() {
+          @Override public void accept(Object o) throws Exception {
 
+            onSelectItem(new ZipExampleFragment());
+
+          }
+        });
+
+    compositeDisposable.add(zipDisposable);
   }
 
 

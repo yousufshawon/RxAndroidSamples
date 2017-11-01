@@ -34,6 +34,14 @@
           style="@style/listButtonStyle"
           />
 
+      <Button
+          android:id="@+id/buttonZip"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Zip Example"
+          style="@style/listButtonStyle"
+          />
+
 
     </LinearLayout>
   </ScrollView>

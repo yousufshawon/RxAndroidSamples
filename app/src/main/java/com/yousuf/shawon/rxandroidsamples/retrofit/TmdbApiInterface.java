@@ -1,5 +1,6 @@
 package com.yousuf.shawon.rxandroidsamples.retrofit;
 
+import com.yousuf.shawon.rxandroidsamples.model.MovieItem;
 import com.yousuf.shawon.rxandroidsamples.model.MoviesResponse;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -16,8 +17,11 @@ public interface TmdbApiInterface {
   @GET("movie/top_rated")
   Observable<MoviesResponse> getTopRatedMovies(@Query("api_key") String apiKey);
 
- // @GET("movie/{id}")
- // Call<MoviesResponse> getMovieDetails(@Path("id") int id, @Query("api_key") String apiKey);
+  @GET("search/movie")
+  Observable<MoviesResponse> getSearchResult(@Query("api_key") String apiKey, @Query("query") String query);
+
+  @GET("movie/{id}")
+  Observable<MovieItem> getMovieDetails(@Path("id") int id, @Query("api_key") String apiKey);
 
 
 

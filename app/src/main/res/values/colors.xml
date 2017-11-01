@@ -4,9 +4,16 @@
   <!--<color name="colorPrimaryDark">#303F9F</color>-->
   <!--<color name="colorAccent">#FF4081</color>-->
 
-  <color name="colorPrimary">#00AA8D</color>
-  <color name="colorPrimaryDark">#008975</color>
-  <color name="colorAccent">#00BF9A</color>
+  <!--<color name="colorPrimary">#00AA8D</color>-->
+  <!--<color name="colorPrimaryDark">#008975</color>-->
+  <!--<color name="colorAccent">#00bf9a</color>-->
+
+  <color name="colorPrimary">#018BB9</color>
+  <color name="colorPrimaryDark">#0181B2</color>
+  <color name="colorAccent">#2cb3ea</color>
+
+
+
   <color name="app_background">#EEF4F4</color>
 
   <color name="colorGreyLight">#8A8A8A</color>
