@@ -1,6 +1,7 @@
 package com.yousuf.shawon.rxandroidsamples.fragments;
 
 import android.support.v4.app.Fragment;
+import com.yousuf.shawon.rxandroidsamples.util.Log;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
@@ -10,6 +11,7 @@ import io.reactivex.disposables.Disposable;
 
 public class BaseFragment extends Fragment {
 
+  String TAG = getClass().getSimpleName();
   // disposable
   CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -22,6 +24,7 @@ public class BaseFragment extends Fragment {
 
   @Override public void onDestroy() {
     super.onDestroy();
+    Log.i(TAG, "onDestroy");
     if (compositeDisposable != null) {
       compositeDisposable.dispose();
     }
