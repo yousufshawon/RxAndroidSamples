@@ -50,6 +50,22 @@
           style="@style/listButtonStyle"
           />
 
+      <Button
+          android:id="@+id/buttonBuffer"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Buffer"
+          style="@style/listButtonStyle"
+          />
+
+      <Button
+          android:id="@+id/buttonObservable"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Observable + OkHttp"
+          style="@style/listButtonStyle"
+          />
+
 
     </LinearLayout>
   </ScrollView>
