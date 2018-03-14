@@ -24,7 +24,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation 'com.android.support:appcompat-v7:' + rootProject.supportLibVersion
-    implementation 'com.android.support:support-v4:26.1.0'
+    implementation 'com.android.support:support-v4:' + rootProject.supportLibVersion
     compile 'com.android.support:support-v4:' + rootProject.supportLibVersion
     implementation 'com.android.support.constraint:constraint-layout:' + rootProject.constraintLayoutVersion
     implementation 'com.android.support:design:' + rootProject.supportLibVersion
