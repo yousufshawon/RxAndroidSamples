@@ -22,7 +22,7 @@ import org.reactivestreams.Subscription;
 public class MainFragment extends Fragment {
 
   Button buttonDeBounce, buttonRetrofit, buttonZip, buttonCombineLatest, buttonBuffer,
-    buttonObservable;
+    buttonObservable, buttonThreadSwitch;
 
   // disposable
   CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -52,6 +52,7 @@ public class MainFragment extends Fragment {
     buttonCombineLatest= (Button) rootView.findViewById(R.id.buttonCombineLatest);
     buttonBuffer = (Button) rootView.findViewById(R.id.buttonBuffer);
     buttonObservable = (Button) rootView.findViewById(R.id.buttonObservable);
+    buttonThreadSwitch = (Button) rootView.findViewById(R.id.buttonThreadSwitch);
 
     addListeners();
   }
@@ -119,6 +120,17 @@ public class MainFragment extends Fragment {
             });
 
       compositeDisposable.add(observableDisposable);
+
+
+      Disposable threadSwitchDisposable =
+              RxView.clicks(buttonThreadSwitch).subscribe(new Consumer<Object>() {
+                  @Override
+                  public void accept(Object o) throws Exception {
+                      onSelectItem( ThreadSwitchFragment.newInstance() );
+                  }
+              });
+
+      compositeDisposable.add(threadSwitchDisposable);
 
   }
 

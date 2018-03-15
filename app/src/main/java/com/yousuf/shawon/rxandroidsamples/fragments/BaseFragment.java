@@ -25,7 +25,7 @@ public class BaseFragment extends Fragment {
   @Override public void onDestroy() {
     super.onDestroy();
     Log.i(TAG, "onDestroy");
-    if (compositeDisposable != null) {
+    if (compositeDisposable != null && !compositeDisposable.isDisposed()) {
       compositeDisposable.dispose();
     }
   }

@@ -33,7 +33,7 @@ import okhttp3.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ObservableWithOkHttpFragment extends Fragment {
+public class ObservableWithOkHttpFragment extends BaseFragment {
 
 
     Disposable disposable;
@@ -100,6 +100,8 @@ public class ObservableWithOkHttpFragment extends Fragment {
                         Log.i(TAG, "onComplete");
                     }
                 });
+
+        addToCompositeDisposable(disposable);
     }
 
 
@@ -107,9 +109,6 @@ public class ObservableWithOkHttpFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
 
-        if (disposable != null && !disposable.isDisposed()) {
-            disposable.dispose();
-        }
     }
 
     @Nullable
