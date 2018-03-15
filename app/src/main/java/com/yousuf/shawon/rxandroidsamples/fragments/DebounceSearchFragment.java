@@ -24,6 +24,7 @@ import com.yousuf.shawon.rxandroidsamples.adapter.ContactRecyclerViewAdapter;
 import com.yousuf.shawon.rxandroidsamples.helper.ContactsQuery;
 import com.yousuf.shawon.rxandroidsamples.model.ContactPerson;
 import com.yousuf.shawon.rxandroidsamples.util.Log;
+
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;

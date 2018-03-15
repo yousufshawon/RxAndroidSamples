@@ -114,7 +114,7 @@ public class MainFragment extends Fragment {
             RxView.clicks(buttonObservable).subscribe(new Consumer<Object>() {
                 @Override
                 public void accept(Object o) throws Exception {
-                    onSelectItem(new ObservableWithOkHttpFragment());
+                    onSelectItem(ObservableWithOkHttpFragment.newInstance());
                 }
             });
 
