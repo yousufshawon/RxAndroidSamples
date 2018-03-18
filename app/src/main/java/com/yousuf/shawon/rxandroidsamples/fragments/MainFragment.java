@@ -10,11 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.yousuf.shawon.rxandroidsamples.R;
-import com.yousuf.shawon.rxandroidsamples.util.Log;
+
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
-import org.reactivestreams.Subscription;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,7 +21,7 @@ import org.reactivestreams.Subscription;
 public class MainFragment extends Fragment {
 
   Button buttonDeBounce, buttonRetrofit, buttonZip, buttonCombineLatest, buttonBuffer,
-    buttonObservable, buttonThreadSwitch;
+    buttonObservable, buttonThreadSwitch, buttonAmdOperator;
 
   // disposable
   CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -53,6 +52,7 @@ public class MainFragment extends Fragment {
     buttonBuffer = (Button) rootView.findViewById(R.id.buttonBuffer);
     buttonObservable = (Button) rootView.findViewById(R.id.buttonObservable);
     buttonThreadSwitch = (Button) rootView.findViewById(R.id.buttonThreadSwitch);
+    buttonAmdOperator = (Button) rootView.findViewById(R.id.buttonAmdOperator);
 
     addListeners();
   }
@@ -131,6 +131,16 @@ public class MainFragment extends Fragment {
               });
 
       compositeDisposable.add(threadSwitchDisposable);
+
+      Disposable amdDisposable =
+              RxView.clicks(buttonAmdOperator).subscribe(new Consumer<Object>() {
+                  @Override
+                  public void accept(Object o) throws Exception {
+                      onSelectItem( AmbExampleFragment.newInstance() );
+                  }
+              });
+
+      compositeDisposable.add(amdDisposable);
 
   }
 
