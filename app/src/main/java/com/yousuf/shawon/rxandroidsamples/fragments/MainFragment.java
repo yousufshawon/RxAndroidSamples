@@ -21,7 +21,7 @@ import io.reactivex.functions.Consumer;
 public class MainFragment extends Fragment {
 
   Button buttonDeBounce, buttonRetrofit, buttonZip, buttonCombineLatest, buttonBuffer,
-    buttonObservable, buttonThreadSwitch, buttonAmdOperator;
+    buttonObservable, buttonThreadSwitch, buttonAmdOperator, buttonCompose;
 
   // disposable
   CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -53,6 +53,7 @@ public class MainFragment extends Fragment {
     buttonObservable = (Button) rootView.findViewById(R.id.buttonObservable);
     buttonThreadSwitch = (Button) rootView.findViewById(R.id.buttonThreadSwitch);
     buttonAmdOperator = (Button) rootView.findViewById(R.id.buttonAmdOperator);
+    buttonCompose = (Button) rootView.findViewById(R.id.buttonCompose);
 
     addListeners();
   }
@@ -141,6 +142,16 @@ public class MainFragment extends Fragment {
               });
 
       compositeDisposable.add(amdDisposable);
+
+      Disposable composeDisposable =
+              RxView.clicks(buttonCompose).subscribe(new Consumer<Object>() {
+                  @Override
+                  public void accept(Object o) throws Exception {
+                      onSelectItem( ComposeExampleFragment.newInstance() );
+                  }
+              });
+
+      compositeDisposable.add(composeDisposable);
 
   }
 
