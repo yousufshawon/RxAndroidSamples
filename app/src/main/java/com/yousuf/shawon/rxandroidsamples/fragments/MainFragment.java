@@ -21,7 +21,7 @@ import io.reactivex.functions.Consumer;
 public class MainFragment extends Fragment {
 
   Button buttonDeBounce, buttonRetrofit, buttonZip, buttonCombineLatest, buttonBuffer,
-    buttonObservable, buttonThreadSwitch, buttonAmdOperator, buttonCompose;
+    buttonObservable, buttonThreadSwitch, buttonAmdOperator, buttonCompose, buttonConcat;
 
   // disposable
   CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -52,8 +52,9 @@ public class MainFragment extends Fragment {
     buttonBuffer = (Button) rootView.findViewById(R.id.buttonBuffer);
     buttonObservable = (Button) rootView.findViewById(R.id.buttonObservable);
     buttonThreadSwitch = (Button) rootView.findViewById(R.id.buttonThreadSwitch);
-    buttonAmdOperator = (Button) rootView.findViewById(R.id.buttonAmdOperator);
+    buttonAmdOperator = (Button) rootView.findViewById(R.id.buttonAmbOperator);
     buttonCompose = (Button) rootView.findViewById(R.id.buttonCompose);
+    buttonConcat = (Button) rootView.findViewById(R.id.buttonConcat);
 
     addListeners();
   }
@@ -112,7 +113,18 @@ public class MainFragment extends Fragment {
     compositeDisposable.add(bufferDisposable);
 
 
-    Disposable observableDisposable =
+      Disposable concatDisposable =
+              RxView.clicks(buttonConcat).subscribe(new Consumer<Object>() {
+                  @Override public void accept(Object o) throws Exception {
+                      onSelectItem( ConcatExampleFragment.newInstance());
+                  }
+              });
+
+      compositeDisposable.add(concatDisposable);
+
+
+
+      Disposable observableDisposable =
             RxView.clicks(buttonObservable).subscribe(new Consumer<Object>() {
                 @Override
                 public void accept(Object o) throws Exception {

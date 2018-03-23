@@ -99,5 +99,11 @@ public class Utils {
     return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
   }
 
+
+  public static long getRandomNumber() {
+    return (long) (Math.random() * 1000);
+  }
+
+
 }
 

@@ -58,6 +58,16 @@
           style="@style/listButtonStyle"
           />
 
+
+      <Button
+          android:id="@+id/buttonConcat"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Concat Example"
+          style="@style/listButtonStyle"
+          />
+
+
       <Button
           android:id="@+id/buttonObservable"
           android:layout_width="match_parent"
@@ -75,10 +85,10 @@
           />
 
       <Button
-          android:id="@+id/buttonAmdOperator"
+          android:id="@+id/buttonAmbOperator"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="Amd Operator"
+          android:text="Amb Operator"
           style="@style/listButtonStyle"
           />
 

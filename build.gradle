@@ -17,6 +17,7 @@ allprojects {
     jcenter()
     google()
   }
+
 }
 
 task clean(type: Delete) {
@@ -41,5 +42,6 @@ ext{
   rxJavaVersion = "2.1.10"
   rxAndroidVersion = "2.0.2"
   rxAndroidBindingVersion = "2.1.1"
+  frodoVersion = "0.8.3"
 
 }
